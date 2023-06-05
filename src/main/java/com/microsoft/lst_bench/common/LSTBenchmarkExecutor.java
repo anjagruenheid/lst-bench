@@ -270,7 +270,8 @@ public class LSTBenchmarkExecutor extends BenchmarkRunnable {
           for (StatementExec statement : file.getStatements()) {
             Instant statementStartTime = Instant.now();
             try (Statement s = connection.createStatement()) {
-              boolean hasResults = s.execute(StringUtils.replaceParameters(statement, values).getStatement());
+              boolean hasResults =
+                  s.execute(StringUtils.replaceParameters(statement, values).getStatement());
               if (hasResults) {
                 ResultSet rs = s.getResultSet();
                 while (rs.next()) {
