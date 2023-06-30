@@ -22,15 +22,26 @@ from storageMetrics import *
 
 # Fetches all experiment data from a duckdb connection. Adds a column 'exp_name'
 # with the experiment identifier as value.
-def retrieve_experiment_df(con, id, start_time):
+def retrieve_event_df(con, id, start_time):
     end_time = con.execute(
         "SELECT event_end_time FROM experiment_telemetry WHERE event_id=? and event_start_time=?;",
         [id, start_time]).df()['event_end_time'].item()
     df = con.execute(
         "SELECT * FROM experiment_telemetry WHERE event_start_time >= ? AND event_end_time <= ? order by event_start_time asc;",
         [start_time, end_time]).df()
-    df["exp_name"] = id
     return df
+
+def retrieve_grouped_event_df(con, id, start_time, filter_ids):
+    # Extract relevant phase data.
+    df = retrieve_event_df(con, id, start_time)
+    df = filterByEventIds(df, filter_ids)
+
+    grouped_df = pd.DataFrame()
+    for idx, row in df.iterrows():
+        event_df = retrieve_event_df(con, row['event_id'], row['event_start_time'])
+        event_df["group_name"] = row['event_id']
+        grouped_df = pd.concat([grouped_df, event_df])
+    return grouped_df
 
 
 # -------- TELEMETRY RETRIEVAL FROM DF -------- #
@@ -41,6 +52,8 @@ def filterByEventType(df, type):
 def filterByEventIds(df, ids):
     return df[df['event_id'].isin(ids)]
 
+def filterByEventPrefix(df, id):
+    return df[df['event_id'].str.startswith(id)]
 
 # -------- TELEMETRY EXTRACTION -------- #
 
