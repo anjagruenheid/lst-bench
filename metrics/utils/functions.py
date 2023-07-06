@@ -74,8 +74,19 @@ def get_cluster_metrics(type, df, cluster_name):
 
 utc_format='%Y-%m-%dT%H:%M:%S.%f'
 def time_diff_in_minutes(time_str1, time_str2):
-    d1 = datetime.strptime(time_str1[:-4], utc_format)
-    d2 = datetime.strptime(time_str2[:-4], utc_format)
+    # Remove 'Z' at the end
+    time_str1 = time_str1[:-1]
+    time_str2 = time_str2[:-1]
+
+    # Shorten if string is too long for parsing
+    if len(time_str1) == 26:
+        time_str1 = time_str1[:-3]
+    if len(time_str2) == 26:
+        time_str2 = time_str2[:-3]
+    
+    # Parse in utc format
+    d1 = datetime.strptime(time_str1, utc_format)
+    d2 = datetime.strptime(time_str2, utc_format)
     return abs((d2 - d1).seconds/60)
 
 
