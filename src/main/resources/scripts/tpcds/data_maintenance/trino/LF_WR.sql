@@ -33,7 +33,7 @@ LEFT OUTER JOIN ${catalog}.${database}.item ON (wret_item_id = i_item_id)
 LEFT OUTER JOIN ${catalog}.${database}.customer c1 ON (wret_return_customer_id = c1.c_customer_id)
 LEFT OUTER JOIN ${catalog}.${database}.customer c2 ON (wret_refund_customer_id = c2.c_customer_id)
 LEFT OUTER JOIN ${catalog}.${database}.reason ON (wret_reason_id = r_reason_id)
-LEFT OUTER JOIN ${catalog}.${database}.web_page ON (wret_web_site_id = WP_WEB_PAGE_id)
+LEFT OUTER JOIN ${catalog}.${database}.web_page ON (wret_web_site_id = wp_web_page_id)
 WHERE i_rec_end_date IS NULL AND wp_rec_end_date IS NULL;
 
 insert into ${catalog}.${database}.web_returns select

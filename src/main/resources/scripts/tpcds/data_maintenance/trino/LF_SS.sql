@@ -29,7 +29,7 @@ ${external_catalog}.${external_database}.s_purchase_${stream_num}
 LEFT OUTER JOIN ${catalog}.${database}.customer ON (purc_customer_id = c_customer_id)
 LEFT OUTER JOIN ${catalog}.${database}.store ON (purc_store_id = s_store_id)
 LEFT OUTER JOIN ${catalog}.${database}.date_dim ON (cast(cast(purc_purchase_date as varchar) as date) = d_date)
-LEFT OUTER JOIN ${catalog}.${database}.time_dim ON (PURC_PURCHASE_TIME = t_time)
+LEFT OUTER JOIN ${catalog}.${database}.time_dim ON (purc_purchase_time = t_time)
 JOIN ${external_catalog}.${external_database}.s_purchase_lineitem_${stream_num} ON (purc_purchase_id = plin_purchase_id)
 LEFT OUTER JOIN ${catalog}.${database}.promotion ON plin_promotion_id = p_promo_id
 LEFT OUTER JOIN ${catalog}.${database}.item ON plin_item_id = i_item_id

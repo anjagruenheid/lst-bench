@@ -58,7 +58,7 @@ CREATE
         )
     LEFT OUTER JOIN ${catalog}.${database}.time_dim ON
         (
-            PURC_PURCHASE_TIME = t_time
+            purc_purchase_time = t_time
         )
     JOIN ${external_catalog}.${external_database}.s_purchase_lineitem_${stream_num} ON
         (

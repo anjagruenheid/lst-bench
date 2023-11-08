@@ -29,11 +29,11 @@ try_cast(i_wholesale_cost * wlin_quantity as decimal(7,2)) ws_ext_wholesale_cost
 try_cast(i_current_price * wlin_quantity as decimal(7,2)) ws_ext_list_price,
 try_cast(i_current_price * web_tax_percentage as decimal(7,2)) ws_ext_tax,
 try_cast(wlin_coupon_amt as decimal(7,2)) ws_coupon_amt,
-try_cast(wlin_ship_cost * wlin_quantity as decimal(7,2)) WS_EXT_SHIP_COST,
+try_cast(wlin_ship_cost * wlin_quantity as decimal(7,2)) ws_ext_ship_cost,
 try_cast((wlin_sales_price * wlin_quantity)-wlin_coupon_amt as decimal(7,2)) ws_net_paid,
 try_cast(((wlin_sales_price * wlin_quantity)-wlin_coupon_amt)*(1+web_tax_percentage) as decimal(7,2)) ws_net_paid_inc_tax,
-try_cast(((wlin_sales_price * wlin_quantity)-wlin_coupon_amt)-(wlin_quantity*i_wholesale_cost) as decimal(7,2)) WS_NET_PAID_INC_SHIP,
-try_cast((wlin_sales_price * wlin_quantity)-wlin_coupon_amt + (wlin_ship_cost * wlin_quantity) + i_current_price * web_tax_percentage as decimal(7,2)) WS_NET_PAID_INC_SHIP_TAX,
+try_cast(((wlin_sales_price * wlin_quantity)-wlin_coupon_amt)-(wlin_quantity*i_wholesale_cost) as decimal(7,2)) ws_net_paid_inc_ship,
+try_cast((wlin_sales_price * wlin_quantity)-wlin_coupon_amt + (wlin_ship_cost * wlin_quantity) + i_current_price * web_tax_percentage as decimal(7,2)) ws_net_paid_inc_ship_tax,
 try_cast(((wlin_sales_price * wlin_quantity)-wlin_coupon_amt)-(i_wholesale_cost * wlin_quantity) as decimal(7,2)) WS_NET_PROFIT
 FROM
 ${external_catalog}.${external_database}.s_web_order_${stream_num}

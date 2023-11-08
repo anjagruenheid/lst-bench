@@ -30,10 +30,10 @@ CREATE
         )* clin_quantity cs_ext_discount_amt,
         clin_sales_price * clin_quantity cs_ext_sales_price,
         i_wholesale_cost * clin_quantity cs_ext_wholesale_cost,
-        i_current_price * clin_quantity CS_EXT_LIST_PRICE,
-        i_current_price * cc_tax_percentage CS_EXT_TAX,
+        i_current_price * clin_quantity cs_ext_list_price,
+        i_current_price * cc_tax_percentage cs_ext_tax,
         clin_coupon_amt cs_coupon_amt,
-        clin_ship_cost * clin_quantity CS_EXT_SHIP_COST,
+        clin_ship_cost * clin_quantity cs_ext_ship_cost,
         (
             clin_sales_price * clin_quantity
         )- clin_coupon_amt cs_net_paid,
@@ -53,7 +53,7 @@ CREATE
             clin_sales_price * clin_quantity
         )- clin_coupon_amt +(
             clin_ship_cost * clin_quantity
-        )+ i_current_price * cc_tax_percentage CS_NET_PAID_INC_SHIP_TAX,
+        )+ i_current_price * cc_tax_percentage cs_net_paid_inc_ship_tax,
         (
             (
                 clin_sales_price * clin_quantity

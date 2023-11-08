@@ -33,7 +33,7 @@ CREATE
         i_current_price * wlin_quantity ws_ext_list_price,
         i_current_price * web_tax_percentage ws_ext_tax,
         wlin_coupon_amt ws_coupon_amt,
-        wlin_ship_cost * wlin_quantity WS_EXT_SHIP_COST,
+        wlin_ship_cost * wlin_quantity ws_ext_ship_cost,
         (
             wlin_sales_price * wlin_quantity
         )- wlin_coupon_amt ws_net_paid,
@@ -48,12 +48,12 @@ CREATE
             (
                 wlin_sales_price * wlin_quantity
             )- wlin_coupon_amt
-        )-(wlin_quantity*i_wholesale_cost) WS_NET_PAID_INC_SHIP,
+        )-(wlin_quantity*i_wholesale_cost) ws_net_paid_inc_ship,
         (
             wlin_sales_price * wlin_quantity
         )- wlin_coupon_amt +(
             wlin_ship_cost * wlin_quantity
-        )+ i_current_price * web_tax_percentage WS_NET_PAID_INC_SHIP_TAX,
+        )+ i_current_price * web_tax_percentage ws_net_paid_inc_ship_tax,
         (
             (
                 wlin_sales_price * wlin_quantity

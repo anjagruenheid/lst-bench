@@ -75,7 +75,7 @@ CREATE
         )
     LEFT OUTER JOIN ${catalog}.${database}.web_page ON
         (
-            wret_web_site_id = WP_WEB_PAGE_id
+            wret_web_site_id = wp_web_page_id
         )
     WHERE
         i_rec_end_date IS NULL
